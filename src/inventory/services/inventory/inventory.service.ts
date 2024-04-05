@@ -2,7 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Inventory } from '../../../typeorm/entities/Inventory';
 import { Repository } from 'typeorm';
-import { CreateInventoryItemParams } from '../../../utils/types';
+import {
+  CreateInventoryItemParams,
+  UpdateInventoryItemParams,
+} from '../../../utils/types';
 
 @Injectable()
 export class InventoryService {
@@ -11,12 +14,21 @@ export class InventoryService {
     private inventoryRepository: Repository<Inventory>,
   ) {}
 
-  fetchInventoryItems() {}
+  fetchInventoryItems() {
+    return this.inventoryRepository.find();
+  }
 
   createInventoryItem(createInventoryDetails: CreateInventoryItemParams) {
     const newItem = this.inventoryRepository.create({
       ...createInventoryDetails,
     });
     return this.inventoryRepository.save(newItem);
+  }
+
+  updateInventoryItem(
+    id: number,
+    updateInventoryItemDetails: UpdateInventoryItemParams,
+  ) {
+    return this.inventoryRepository.update({ id }, {...updateInventoryItemDetails})
   }
 }
