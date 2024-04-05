@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -31,5 +32,10 @@ export class InventoryController {
     @Body() updateInventoryItemDto: UpdateInventoryItemDto,
   ) {
     await this.inventoryService.updateInventoryItem(id, updateInventoryItemDto);
+  }
+
+  @Delete(':id')
+  async deleteInventoryItemById(@Param('id', ParseIntPipe) id: number) {
+    await this.inventoryService.deleteInventoryItem(id);
   }
 }

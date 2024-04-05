@@ -31,4 +31,8 @@ export class InventoryService {
   ) {
     return this.inventoryRepository.update({ id }, {...updateInventoryItemDetails})
   }
+
+  deleteInventoryItem(id: number) {
+    return this.inventoryRepository.delete({ id });
+  }
 }
