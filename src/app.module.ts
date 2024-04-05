@@ -3,7 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { Inventory } from '../typeorm/entities/Inventory';
+import { Inventory } from './typeorm/entities/Inventory';
+import { InventoryModule } from './inventory/inventory.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { Inventory } from '../typeorm/entities/Inventory';
       entities: [Inventory],
       synchronize: true,
     }),
+    InventoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
