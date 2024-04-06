@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { CreateInventoryItemDto } from '../../dtos/CreateInventoryItem.dto';
 import { InventoryService } from '../../services/inventory/inventory.service';
@@ -37,5 +38,10 @@ export class InventoryController {
   @Delete(':id')
   async deleteInventoryItemById(@Param('id', ParseIntPipe) id: number) {
     await this.inventoryService.deleteInventoryItem(id);
+  }
+
+  @Get('/search')
+  async getInventoryItemsByName(@Query('name') name: string) {
+    return this.inventoryService.fetchInventoryItemsByName(name);
   }
 }

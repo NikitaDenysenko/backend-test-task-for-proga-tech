@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Inventory } from '../../../typeorm/entities/Inventory';
-import { Repository } from 'typeorm';
+import { Repository, Like } from 'typeorm';
 import {
   CreateInventoryItemParams,
   UpdateInventoryItemParams,
@@ -34,5 +34,13 @@ export class InventoryService {
 
   deleteInventoryItem(id: number) {
     return this.inventoryRepository.delete({ id });
+  }
+
+  async fetchInventoryItemsByName(name: string) {
+    return await this.inventoryRepository.find({
+      where: {
+        item: Like(`%${name}%`),
+      },
+    });
   }
 }
