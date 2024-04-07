@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { Inventory } from './typeorm/entities/Inventory';
 import { InventoryModule } from './inventory/inventory.module';
+import * as process from "process";
 
 @Module({
   imports: [
@@ -13,9 +14,9 @@ import { InventoryModule } from './inventory/inventory.module';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      username: 'root',
-      port: 3306,
+      host: process.env.DATABASE_HOST,
+      username: process.env.DATABASE_USERNAME,
+      port: Number(process.env.DATABASE_PORT),
       password: process.env.DATABASE_PASSWORD,
       database: 'film_inventory',
       entities: [Inventory],
