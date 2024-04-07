@@ -5,7 +5,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { Inventory } from './typeorm/entities/Inventory';
 import { InventoryModule } from './inventory/inventory.module';
-import * as process from "process";
 
 @Module({
   imports: [
